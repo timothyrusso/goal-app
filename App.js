@@ -1,12 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+  const goalInputHandler = (enteredText) => setEnteredGoalText(enteredText);
+
+  const addGoalHandler = () => console.log(enteredGoalText);
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Your course gol!" style={styles.TextInput} />
-        <Button title="Add a goal" />
+        <TextInput
+          placeholder="Your course gol!"
+          style={styles.TextInput}
+          onChangeText={goalInputHandler}
+        />
+        <Button title="Add a goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
         <Text>List of goals</Text>
