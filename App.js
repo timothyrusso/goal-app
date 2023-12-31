@@ -7,11 +7,21 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
-    setCourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals,
-      enteredGoalText,
-    ]);
+    const trimmedText = enteredGoalText.trim();
+    if (trimmedText.length > 0)
+      setCourseGoals((currentCourseGoals) => [
+        ...currentCourseGoals,
+        enteredGoalText,
+      ]);
   }
+
+  const handleDeleteItem = (goalKey) => {
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter(
+        (goal, index) => goal + index !== goalKey
+      );
+    });
+  };
 
   return (
     <View style={styles.appContainer}>
@@ -21,8 +31,14 @@ export default function App() {
           data={courseGoals}
           alwaysBounceVertical={false}
           keyExtractor={(item, index) => item + index}
-          renderItem={(itemData) => {
-            return <GoalItem itemData={itemData.item} />;
+          renderItem={({ item, index }) => {
+            const itemKey = item + index;
+            return (
+              <GoalItem
+                itemData={item}
+                onDeleteIdem={() => handleDeleteItem(itemKey)}
+              />
+            );
           }}
         />
       </View>
