@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
+import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const GoalInput = ({ onAddGoal, modalIsVisible, onClose }) => {
+const GoalInput = ({ onAddGoal, modalIsVisible, onClose, validationError }) => {
   const [enteredGoalText, setEnteredGoalText] = useState('');
 
   const goalInputHandler = (enteredText) => setEnteredGoalText(enteredText);
@@ -14,6 +14,9 @@ const GoalInput = ({ onAddGoal, modalIsVisible, onClose }) => {
   return (
     <Modal animationType="slide" visible={modalIsVisible}>
       <View style={styles.inputContainer}>
+        {validationError ? (
+          <Text style={styles.error}>Please enter a goal</Text>
+        ) : null}
         <TextInput
           placeholder="Your course gol!"
           style={styles.TextInput}
@@ -59,5 +62,10 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 8,
     width: '80%',
+  },
+  error: {
+    color: 'red',
+    position: 'absolute',
+    bottom: '30%',
   },
 });

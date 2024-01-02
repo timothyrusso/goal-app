@@ -6,6 +6,7 @@ import GoalItem from './components/GoalItem';
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [validationError, setValidationError] = useState(false);
 
   const startAddGoalHandler = () => setModalIsVisible(true);
 
@@ -17,6 +18,8 @@ export default function App() {
         enteredGoalText,
       ]);
       closeModal();
+    } else {
+      setValidationError(true);
     }
   }
 
@@ -28,7 +31,10 @@ export default function App() {
     });
   };
 
-  const closeModal = () => setModalIsVisible(false);
+  const closeModal = () => {
+    setModalIsVisible(false);
+    setValidationError(false);
+  };
 
   return (
     <View style={styles.appContainer}>
@@ -41,6 +47,7 @@ export default function App() {
         onAddGoal={addGoalHandler}
         modalIsVisible={modalIsVisible}
         onClose={closeModal}
+        validationError={validationError}
       />
       <View style={styles.goalsContainer}>
         <FlatList
