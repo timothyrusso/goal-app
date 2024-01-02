@@ -22,9 +22,6 @@ const GoalInput = ({ onAddGoal, modalIsVisible, onClose, validationError }) => {
   return (
     <Modal animationType="slide" visible={modalIsVisible}>
       <View style={styles.inputContainer}>
-        {validationError ? (
-          <Text style={styles.error}>Please enter a goal</Text>
-        ) : null}
         <Image
           source={require('../assets/images/goal.png')}
           style={styles.image}
@@ -37,11 +34,18 @@ const GoalInput = ({ onAddGoal, modalIsVisible, onClose, validationError }) => {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Add a goal" onPress={addGoalHandler} />
+            <Button
+              title="Add a goal"
+              onPress={addGoalHandler}
+              color="#B180F0"
+            />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={onClose} />
+            <Button title="Cancel" onPress={onClose} color="#F31282" />
           </View>
+          {validationError ? (
+            <Text style={styles.error}>Please enter a goal</Text>
+          ) : null}
         </View>
       </View>
     </Modal>
@@ -65,19 +69,21 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     borderWidth: 1,
-    borderColor: '#CCC',
-    padding: 10,
-    borderRadius: 10,
+    borderColor: '#E4D0FF',
+    backgroundColor: '#E4D0FF',
+    color: '#120438',
+    padding: 16,
+    borderRadius: 30,
     width: '100%',
   },
   button: {
     marginHorizontal: 8,
-    width: '80%',
+    width: 150,
   },
   error: {
     color: 'red',
     position: 'absolute',
-    bottom: '25%',
+    bottom: -30,
   },
   image: {
     width: 100,
