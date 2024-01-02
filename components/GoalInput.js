@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 const GoalInput = ({ onAddGoal, modalIsVisible, onClose, validationError }) => {
   const [enteredGoalText, setEnteredGoalText] = useState('');
@@ -17,6 +25,10 @@ const GoalInput = ({ onAddGoal, modalIsVisible, onClose, validationError }) => {
         {validationError ? (
           <Text style={styles.error}>Please enter a goal</Text>
         ) : null}
+        <Image
+          source={require('../assets/images/goal.png')}
+          style={styles.image}
+        />
         <TextInput
           placeholder="Your course gol!"
           style={styles.TextInput}
@@ -43,9 +55,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCC',
     paddingHorizontal: 16,
+    backgroundColor: '#311B6B',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -66,6 +77,11 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     position: 'absolute',
-    bottom: '30%',
+    bottom: '25%',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
   },
 });
