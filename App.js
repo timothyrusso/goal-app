@@ -16,7 +16,7 @@ export default function App() {
         ...currentCourseGoals,
         enteredGoalText,
       ]);
-      setModalIsVisible(false);
+      closeModal();
     }
   }
 
@@ -28,6 +28,8 @@ export default function App() {
     });
   };
 
+  const closeModal = () => setModalIsVisible(false);
+
   return (
     <View style={styles.appContainer}>
       <Button
@@ -35,7 +37,11 @@ export default function App() {
         color="#5E0ACC"
         onPress={startAddGoalHandler}
       />
-      <GoalInput onAddGoal={addGoalHandler} modalIsVisible={modalIsVisible} />
+      <GoalInput
+        onAddGoal={addGoalHandler}
+        modalIsVisible={modalIsVisible}
+        onClose={closeModal}
+      />
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}
